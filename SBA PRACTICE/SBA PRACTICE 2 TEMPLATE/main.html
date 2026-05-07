@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Pokedex</title>
+</head>
+<body>
+    <h1>Pokemon Pokedex</h1>
+    <h2>Select a Pokemon to view its details</h2>
+    <div class="single-card-container">
+        <!-- When a card is clicked, the details will be shown here -->
+
+    </div>
+
+    <div class="cards-container">
+        <!-- Your cards will be added here using JavaScript -->
+         
+    </div>
+
+    
+
+    <script>
+        // Fetch data from this API
+        const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=24&offset=0";
+        
+        // Your JavaScript here
+        // 1. Fetch the data
+        // 2. Loop through the items and create cards
+        // 3. Add the cards to the container
+        
+        async function getData(apiUrl) {
+            const res = await fetch(apiUrl);
+            const data = await res.json();
+            //console.log(data); // Check the data in the console to see how to access the items
+            displayData(data);
+        }
+
+        function displayData(data) {
+            data.results.forEach(pokemon => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png" alt="${pokemon.name}">    
+                <h2>${pokemon.name}</h2>
+                <p>URL: ${pokemon.url}</p>
+                    
+                `;
+                card.addEventListener('click', () => {
+                    getIndividualOne(pokemon.url);
+                });
+                document.querySelector('.cards-container').appendChild(card);
+            });
+        }
+
+        getData(apiUrl); // GO!
+        
+
+        async function getIndividualOne(apiUrl) {
+            const res = await fetch(apiUrl);
+            const data = await res.json();
+            //console.log(data); // Check the data in the console to see how to access the items  
+            displayIndividualData(data);
+        }
+
+        function displayIndividualData(data) {
+            const container = document.querySelector('.single-card-container');
+            container.innerHTML = `
+                <h2>${data.name}</h2>
+                <img src="${data.sprites.front_default}" alt="${data.name}">
+                <p>Height: ${data.height}</p>
+                <p>Weight: ${data.weight}</p>
+                <p>Types: ${data.types.map(type => type.type.name).join(', ')}</p>
+                <p>Abilities: ${data.abilities.map(ability => ability.ability.name).join(', ')}</p>
+                <p>Stats: ${data.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`).join(', ')}</p>
+
+            `;
+        }
+
+    </script>
+
+    <style>
+        /* Your CSS here
+           Requirements:
+           - Cards should be the same size
+           - Use CSS Grid for a 3-column layout
+           - Responsive design: cards should stack on mobile
+        */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .cards-container .card {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .cards-container img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .cards-container h2 {
+            text-transform: capitalize;
+        }
+
+        .single-card-container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #333;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .single-card-container img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .single-card-container h2 {
+            text-transform: capitalize;
+        }
+
+        .single-card-container p {
+            margin: 5px 0;
+        }
+
+         /* Responsive design */
+
+        .card {
+          background: linear-gradient(135deg, #ffc75e, #ffe9b5);
+           box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+           cursor: pointer;
+           transition: transform 0.2s ease, box-shadow 0.2s ease;
+           border-radius: 12px;
+        }
+        .card:hover {
+             transform: translateY(-5px);
+              box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+             background: linear-gradient(135deg, #ffde59, #ff914d);
+        }
+
+        h1 {
+             text-align: center;
+             color: #333;
+             margin-top: 20px;
+        }
+
+        h2 {
+             text-align: center;
+             color: #333;
+             margin-top: 20px;
+        }
+
+         @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+
+    </style>
+</body>
+</html>

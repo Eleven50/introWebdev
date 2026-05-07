@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Quiz</title>
+    <!-- Attach your stylesheet here -->
+        <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>World Knowledge Quiz</h1>
+    <form id="quiz-form">
+        <!-- Add your questions here -->
+        <div><label for="Q1">Question 1: What is the capital of France?</label></div>
+        <input type="text" id="Q1" name="Q1" required>
+
+        <div><label for="Q2">Question 2: What is the largest planet in our solar system?</label></div>
+        <input type="checkbox" id="Q2" name="Q2"> Earth
+        <input type="checkbox" id="Q2" name="Q2"> Jupiter
+        <input type="checkbox" id="Q2" name="Q2"> Saturn
+
+        <div><label for="Q3">Question 3: What is the value of π (pi)?</label></div>
+        <input type="radio" id="Q3a" name="Q3" value="Option A">
+        <label for="Q3a">Option A: 3.14</label>
+        <input type="radio" id="Q3b" name="Q3" value="Option B">
+        <label for="Q3b">Option B: 2.71</label>
+        <input type="radio" id="Q3c" name="Q3" value="Option C">
+        <label for="Q3c">Option C: 1.62</label>
+
+        <div><button type="submit" id="submit-btn">Check Answers</button></div>
+    </form>
+
+    
+    <div id="results"></div>
+    
+
+
+
+    <!-- Attach your script here -->
+     <script src="script.js"></script>
+
+</body>
+</html>

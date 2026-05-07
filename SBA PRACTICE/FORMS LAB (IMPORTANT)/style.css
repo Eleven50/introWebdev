@@ -1,0 +1,43 @@
+body {font: 1em sans-serif;
+        background: #f0f0f0;
+        color: #333;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+input[type="text"],
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: 10px;
+}
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+button:hover {
+    background-color: #2980b9;
+}
+
